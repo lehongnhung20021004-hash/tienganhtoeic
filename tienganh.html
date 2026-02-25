@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế Hoạch TOEIC 750+ | 48 Buổi Thực Chiến</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #74b9ff;
+            --secondary-color: #81ecec;
+            --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Comfortaa', cursive;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0984e3;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .tip-box {
+            background: #ffeaa7;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            border-left: 5px solid #fdcb6e;
+        }
+
+        .week-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(116, 185, 255, 0.3);
+        }
+
+        .session-card {
+            background: var(--white);
+            border: 2px solid #dfe6e9;
+            border-radius: 16px;
+            margin: 15px 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .session-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .session-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafbfc;
+        }
+
+        .session-title {
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        .session-type {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .type-grammar { background: #fab1a0; color: #d63031; }
+        .type-vocab { background: #81ecec; color: #00b894; }
+        .type-practice { background: #a29bfe; color: #6c5ce7; }
+
+        .session-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: var(--white);
+        }
+
+        .session-card.active .session-content {
+            padding: 20px;
+            max-height: 500px;
+            border-top: 1px solid #dfe6e9;
+        }
+
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .timeline li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .timeline li::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% - 2px);
+            background: #dfe6e9;
+        }
+
+        .timeline li:last-child::after {
+            display: none;
+        }
+
+        .time-badge {
+            font-weight: 700;
+            color: #0984e3;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            .session-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 48 Buổi Thực Chiến TOEIC</h1>
+    <div class="subtitle">Hành trình từ con số 0 đến 750+ (Giai đoạn 1 & 2)</div>
+
+    <div class="tip-box">
+        <strong>💡 Mẹo nhỏ:</strong> Bạn không nhất thiết phải ngồi lỳ 2 tiếng. Những lúc đứng quầy nhàn rỗi ở tiệm boba, hãy lôi sổ tay ra nhẩm lại 5-10 từ vựng hoặc nhẩm lại công thức một thì ngữ pháp nhé. Tích tiểu thành đại!
+    </div>
+
+    <div id="app">
+        </div>
+</div>
+
+<script>
+    // Dữ liệu cấu trúc chương trình học
+    const syllabus = [
+        // Tuần 1-4: Xây móng Ngữ pháp & Dest B1 cơ bản
+        { type: 'grammar', title: 'Hiện tại đơn & Hiện tại tiếp diễn', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 1) + 10 từ Office', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Nghe chép chính tả + Ôn tập Thì HT', tools: 'YouTube + Sổ tay' },
+        
+        { type: 'grammar', title: 'Quá khứ đơn & Quá khứ tiếp diễn', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 2) + 10 từ Office', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Nghe chép chính tả + Ôn tập Thì QK', tools: 'YouTube + Sổ tay' },
+        
+        { type: 'grammar', title: 'Hiện tại hoàn thành & Tương lai', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 3) + 10 từ Personnel', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Nghe chép chính tả + Ôn tập tổng hợp Thì', tools: 'YouTube + Sổ tay' },
+
+        { type: 'grammar', title: 'Từ loại: Danh từ & Động từ', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 4) + 10 từ Personnel', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Giải đề Mini Part 1 (5 tranh đầu tiên)', tools: 'Đề ETS' },
+
+        // Tuần 5-8: Từ loại, Giới từ & Làm quen Part 1, 2
+        { type: 'grammar', title: 'Từ loại: Tính từ & Trạng từ', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 5) + 10 từ Purchasing', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Luyện nghe TOEIC Part 1 (10 tranh)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Giới từ cơ bản (In, On, At)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 6) + 10 từ Purchasing', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Luyện nghe TOEIC Part 1 (Phân tích bẫy)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Liên từ (And, But, Because, So)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 7) + 10 từ Financing', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Làm quen TOEIC Part 2 (Hỏi Who/What)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Mạo từ (A, An, The)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 8) + 10 từ Financing', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Luyện nghe TOEIC Part 2 (Hỏi When/Where)', tools: 'Đề ETS' },
+
+        // Tuần 9-12: Mở rộng Ngữ pháp & Hoàn thành B1
+        { type: 'grammar', title: 'Sự hòa hợp Chủ ngữ & Động từ', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 9) + 10 từ Management', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Luyện nghe TOEIC Part 2 (Hỏi Why/How)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Cấu trúc So sánh (Hơn, Nhất)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 10) + 10 từ Management', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Tổng duyệt Part 1 & 2 (Bấm giờ 20p)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Động từ khuyết thiếu (Modal Verbs)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 11) + 10 từ Travel', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Làm quen Part 5 (15 câu ngữ pháp cơ bản)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Review 12 Thì & Từ loại', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B1 (Unit 12) + 10 từ Travel', tools: 'Dest B1 & 600 Words' },
+        { type: 'practice', title: 'Thi thử Mini Test (Part 1, 2, 5)', tools: 'Đề ETS' },
+
+        // Tuần 13-16: Chuyển sang B2, Collocations & Mệnh đề
+        { type: 'grammar', title: 'Mệnh đề quan hệ (Who/Which/That)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B2 (Unit 1) + Collocations (Work)', tools: 'Dest B2 & 2000 Colloc' },
+        { type: 'practice', title: 'Áp dụng Mệnh đề quan hệ vào Part 5', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Mệnh đề quan hệ rút gọn', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B2 (Unit 2) + Collocations (Work)', tools: 'Dest B2 & 2000 Colloc' },
+        { type: 'practice', title: 'Làm quen Part 6 (Điền từ đoạn văn)', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Câu Bị động (Cơ bản)', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B2 (Unit 3) + Collocations (Study)', tools: 'Dest B2 & 2000 Colloc' },
+        { type: 'practice', title: 'Áp dụng Câu bị động vào Part 5', tools: 'Đề ETS' },
+
+        { type: 'grammar', title: 'Câu Bị động (Đặc biệt) & Review', tools: 'Tổng ôn Ngữ pháp' },
+        { type: 'vocab', title: 'Dest B2 (Unit 4) + Collocations (Study)', tools: 'Dest B2 & 2000 Colloc' },
+        { type: 'practice', title: 'Giải đề Part 5 & 6 (Bấm giờ 20 phút)', tools: 'Đề ETS' }
+    ];
+
+    // Tạo Kịch bản 120 phút dựa trên Loại buổi học (grammar/vocab/practice)
+    function getTimeline(type, tools) {
+        if (type === 'grammar') {
+            return `
+                <li><span class="time-badge">00 - 10p:</span> Warm-up: Nhẩm lại công thức/từ vựng của buổi trước.</li>
+                <li><span class="time-badge">10 - 55p:</span> Đọc lý thuyết bài mới trong cuốn <i>${tools}</i>. Highlight cấu trúc lõi. Tự lấy 2 ví dụ ra nháp.</li>
+                <li><span class="time-badge">55 - 65p:</span> ☕ Nghỉ giải lao, đứng dậy vươn vai.</li>
+                <li><span class="time-badge">65 - 110p:</span> Làm bài tập áp dụng chuyên đề vừa học trong sách.</li>
+                <li><span class="time-badge">110 - 120p:</span> Chấm điểm. Lấy bút đỏ khoanh câu sai và ghi chú lý do sai vào sổ tay.</li>
+            `;
+        } else if (type === 'vocab') {
+            return `
+                <li><span class="time-badge">00 - 10p:</span> Che cột tiếng Việt, kiểm tra nhanh từ vựng buổi trước.</li>
+                <li><span class="time-badge">10 - 55p:</span> Học từ mới trong <i>${tools}</i>. Đọc to từ -> Xem từ loại -> Đọc câu ví dụ -> Tự dịch sang tiếng Việt.</li>
+                <li><span class="time-badge">55 - 65p:</span> ☕ Nghỉ giải lao cho mắt thư giãn.</li>
+                <li><span class="time-badge">65 - 110p:</span> Làm toàn bộ bài tập của Unit đó. Cố gắng không lật lại xem lý thuyết.</li>
+                <li><span class="time-badge">110 - 120p:</span> So đáp án. Chép các cụm từ làm sai hoặc không nhớ mặt chữ vào "Error Log".</li>
+            `;
+        } else {
+            return `
+                <li><span class="time-badge">00 - 10p:</span> Ôn lại từ vựng vừa nạp ở buổi trước.</li>
+                <li><span class="time-badge">10 - 55p:</span> Mở <i>${tools}</i>. Thực hành bấm giờ làm bài (Nghe chép chính tả hoặc Giải đề Part 1/2/5/6).</li>
+                <li><span class="time-badge">55 - 65p:</span> ☕ Nghỉ giải lao, reset não bộ.</li>
+                <li><span class="time-badge">65 - 110p:</span> Mở Transcript / Đáp án chi tiết. Vừa nghe/đọc lại vừa tra từ mới. Phân tích bẫy (do từ vựng yếu hay do ngữ pháp).</li>
+                <li><span class="time-badge">110 - 120p:</span> Ghi chú từ vựng mới rút ra từ đề thi. Tập nhại giọng (Shadowing) theo audio.</li>
+            `;
+        }
+    }
+
+    const app = document.getElementById('app');
+    let htmlContent = '';
+    let currentWeek = 0;
+
+    syllabus.forEach((session, index) => {
+        const sessionNum = index + 1;
+        const weekNum = Math.ceil(sessionNum / 3);
+        
+        // Render Header Tuần mới
+        if (weekNum !== currentWeek) {
+            htmlContent += `<div class="week-header">Tuần ${weekNum}</div>`;
+            currentWeek = weekNum;
+        }
+
+        const typeClass = `type-${session.type}`;
+        const typeLabel = session.type === 'grammar' ? 'Ngữ Pháp' : 
+                          session.type === 'vocab' ? 'Từ Vựng' : 'Thực Hành';
+
+        htmlContent += `
+            <div class="session-card">
+                <div class="session-header" onclick="toggleCard(this)">
+                    <div class="session-title">Buổi ${sessionNum}: ${session.title}</div>
+                    <div class="session-type ${typeClass}">${typeLabel}</div>
+                </div>
+                <div class="session-content">
+                    <p style="margin-top:0; color: #636e72;"><strong>📚 Tài liệu:</strong> ${session.tools}</p>
+                    <ul class="timeline">
+                        ${getTimeline(session.type, session.tools)}
+                    </ul>
+                </div>
+            </div>
+        `;
+    });
+
+    app.innerHTML = htmlContent;
+
+    // Script xử lý Accordion đóng/mở
+    function toggleCard(element) {
+        const card = element.parentElement;
+        const isActive = card.classList.contains('active');
+        
+        // Đóng tất cả các thẻ đang mở
+        document.querySelectorAll('.session-card').forEach(c => c.classList.remove('active'));
+        
+        // Mở thẻ được click nếu nó đang đóng
+        if (!isActive) {
+            card.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
